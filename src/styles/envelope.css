@@ -1,0 +1,177 @@
+/* Envelope Intro Overlay - DROP DOWN REVEAL Edition */
+#envelope-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: transparent;
+    z-index: 10000;
+    overflow: hidden;
+    perspective: 1500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: visibility 0s 4s;
+    /* Hide after sequence */
+}
+
+/* The Envelope Container */
+.envelope-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    cursor: pointer;
+    background: #e6dac8;
+    /* Main body of envelope */
+    transition: transform 1.8s cubic-bezier(0.65, 0, 0.35, 1);
+    /* Smoother, slightly faster end */
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+    /* Initially no shadow */
+}
+
+/* Shadow appears when sliding down */
+.envelope-wrapper.slide-down {
+    box-shadow: 0 -50px 100px rgba(0, 0, 0, 0.3);
+    /* Shadow cast upwards/on content */
+}
+
+/* Texture Layer */
+.paper-texture {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.1'/%3E%3C/svg%3E"),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.2), rgba(0, 0, 0, 0.1));
+    pointer-events: none;
+}
+
+/* FLAPS */
+
+/* Top Flap - Covers upper part, will flip UP */
+.top-flap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 55vh;
+    background: #e6dac8;
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    transform-origin: top center;
+    transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 10;
+    filter: drop-shadow(0 15px 15px rgba(0, 0, 0, 0.15));
+}
+
+/* Bottom Flap - Static, decorative */
+.bottom-flap {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50vh;
+    background: #dcbfa4;
+    clip-path: polygon(0 100%, 100% 100%, 50% 0);
+    z-index: 9;
+}
+
+/* Side Flaps - Static */
+.side-flap-left {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    background: #d3c5b1;
+    clip-path: polygon(0 0, 0 100%, 100% 50%);
+    z-index: 8;
+}
+
+.side-flap-right {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50%;
+    height: 100%;
+    background: #d3c5b1;
+    clip-path: polygon(100% 0, 100% 100%, 0 50%);
+    z-index: 8;
+}
+
+
+/* Seal */
+.wax-seal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: min(140px, 22vw);
+    height: min(140px, 22vw);
+    /* Realistic Wax Gradient */
+    background: radial-gradient(circle at 30% 30%, #ff5252, #b71c1c 60%, #7f0000 100%);
+    border-radius: 50%;
+    z-index: 20;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Deep shadow for 3D lift */
+    box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.4),
+        inset 0 2px 5px rgba(255, 255, 255, 0.3),
+        inset 0 -5px 10px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    /* Uneven border for stamped wax look */
+    border: 4px solid rgba(183, 28, 28, 0.8);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    /* Bouncy hover */
+}
+
+.wax-seal:hover {
+    transform: translate(-50%, -50%) scale(1.1);
+    filter: brightness(1.1);
+}
+
+.wax-text {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-style: italic;
+    font-size: 2rem;
+    color: #e6c585;
+    /* Gold stamped color */
+    text-shadow:
+        0 1px 1px rgba(255, 255, 255, 0.3),
+        0 -1px 1px rgba(0, 0, 0, 0.5);
+    /* Embossed effect */
+    opacity: 0.9;
+    letter-spacing: -1px;
+}
+
+/* --- ANIMATIONS --- */
+
+/* 1. OPEN: Top flap flips up */
+.envelope-wrapper.open .top-flap {
+    transform: rotateX(180deg);
+    z-index: 1;
+    /* Moves behind */
+}
+
+.envelope-wrapper.open .wax-seal {
+    transform: translate(-50%, -50%) scale(1.8);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.5s ease-in, opacity 0.3s ease-out;
+}
+
+/* 2. SLIDE DOWN: Whole envelope drops */
+.envelope-wrapper.slide-down {
+    transform: translateY(120vh);
+    /* Drop completely off screen */
+
+    /* Heavy object physics: Slow start, fast drop */
+    transition-timing-function: cubic-bezier(0.6, -0.28, 0.735, 0.045);
+    transition-duration: 1.5s;
+    transition-property: transform;
+}

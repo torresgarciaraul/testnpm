@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Laura & Raúl · 27·06·2026</title>
+  <link rel="icon" type="image/png" href="/imagenes/raul_laura_acu.png">
+  <meta name="description" content="Invitación de boda de Laura y Raúl - 27 de junio de 2026" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Boda Laura & Raúl - 27 de Junio 2026">
+  <meta property="og:description" content="¡Nos casamos! Palacete de la Ochava, Valdilecha.">
+  <meta property="og:image" content="/imagenes/raul_laura_acu.png">
+
+  <!-- Theme Color -->
+  <meta name="theme-color" content="#5c7d62">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;600&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="/src/styles/main.css">
+</head>
+
+<body>
+
+  <!-- Preloader -->
+  <div id="preloader">
+    <div class="loader-content">
+      <div class="loader-logo">L & R</div>
+      <div class="loader-spinner"></div>
+    </div>
+  </div>
+
+  <a href="#contenido" class="skip-link">Saltar al contenido principal</a>
+  <div id="progressBar"></div>
+  <button id="themeToggle" aria-label="Cambiar tema" title="Cambiar entre modo claro y oscuro">🌙</button>
+
+  <nav aria-label="Navegación principal">
+    <button id="menuBtn" aria-haspopup="true" aria-expanded="false" aria-label="Abrir menú">☰ Menú</button>
+    <div id="menuOpciones" role="menu">
+      <button data-target="p1">Inicio</button>
+      <button data-target="p2">Fecha</button>
+      <button data-target="p3">Lugar</button>
+      <button data-target="p4">Mapa</button>
+      <button data-target="pInfo">Información Útil</button>
+      <button data-target="p5">Timeline</button>
+      <button data-target="p6">Confirmación</button>
+      <button data-target="p8">Gracias</button>
+    </div>
+  </nav>
+
+  <main id="contenido">
+
+    <!-- Navigation Bar (Mobile/Desktop Unified) -->
+    <nav class="bottom-nav glass">
+      <button class="nav-item active" onclick="irA('p1')" aria-label="Inicio">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+          <polyline points="9 22 9 12 15 12 15 22"></polyline>
+        </svg>
+        <span>Inicio</span>
+      </button>
+      <button class="nav-item" onclick="irA('p2')" aria-label="Detalles">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="16" x2="12" y2="12"></line>
+          <line x1="12" y1="8" x2="12.01" y2="8"></line>
+        </svg>
+        <span>Info</span>
+      </button>
+      <button class="nav-item" onclick="irA('p6')" aria-label="Confirmar">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+          <polyline points="22 4 12 14.01 9 11.01"></polyline>
+        </svg>
+        <span>RSVP</span>
+      </button>
+      <button class="nav-item" id="navMusicHelper" aria-label="Música">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 18V5l12-2v13"></path>
+          <circle cx="6" cy="18" r="3"></circle>
+          <circle cx="18" cy="16" r="3"></circle>
+        </svg>
+        <span>Música</span>
+      </button>
+    </nav>
+
+    <!-- Envelope Intro (Drop-Down Reveal) -->
+    <div id="envelope-overlay">
+      <div class="envelope-wrapper" id="envelopeWrapper">
+        <div class="side-flap-left paper-texture"></div>
+        <div class="side-flap-right paper-texture"></div>
+        <div class="bottom-flap paper-texture"></div>
+        <div class="top-flap paper-texture"></div>
+
+        <div class="wax-seal" id="waxSeal">
+          <span class="wax-text">Laura & Raúl</span>
+        </div>
+      </div>
+    </div>
+
+    <section class="pantalla activa" id="p1">
+      <div class="hero-background" id="canvas-container">
+        <!-- Canvas or decorative elements will be injected here -->
+        <div class="floating-hearts">
+          <span class="heart-particle">💚</span>
+          <span class="heart-particle">🌿</span>
+          <span class="heart-particle">✨</span>
+          <span class="heart-particle">💛</span>
+        </div>
+      </div>
+      <div class="hero-content">
+        <div class="img-container hero-img" style="box-shadow: var(--sombra-fuerte);">
+          <img src="/imagenes/raul_laura_acu.png" alt="Fotografía de Laura y Raúl" class="fullscreen" id="heroImage">
+        </div>
+        <h1 class="hero-title" data-animate="fade-up">
+          <span class="hero-name text-gradient">Laura</span>
+          <span class="hero-ampersand">&</span>
+          <span class="hero-name text-gradient">Raúl</span>
+        </h1>
+        <div class="hero-date" data-animate="fade-up" style="transition-delay: 0.2s">27 · 06 · 2026</div>
+        <p class="hero-subtitle" data-animate="fade-up" style="transition-delay: 0.3s">¡Nos casamos!</p>
+        <p class="hero-message" data-animate="fade-up" style="transition-delay: 0.4s">
+          Nos hace muchísima ilusión que nos acompañes en un día tan especial
+        </p>
+        <button onclick="irA('p2')" class="cta-button" aria-label="Comenzar a explorar la invitación"
+          data-animate="scale-in" style="transition-delay: 0.6s">
+          <span>ABRIR INVITACIÓN</span>
+          <svg class="arrow-icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <path fill="currentColor" d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z" />
+          </svg>
+        </button>
+      </div>
+    </section>
+
+    <section class="pantalla" id="p2">
+      <h2>📅 27 de junio de 2026</h2>
+      <p>Cuenta atrás para el gran día:</p>
+      <div class="countdown-container" id="countdownContainer" aria-live="polite">
+        <div class="countdown-box">
+          <div class="countdown-number" id="countDays">0</div>
+          <div class="countdown-label">Días</div>
+        </div>
+        <div class="countdown-separator" aria-hidden="true">:</div>
+        <div class="countdown-box">
+          <div class="countdown-number" id="countHours">0</div>
+          <div class="countdown-label">Horas</div>
+        </div>
+        <div class="countdown-separator" aria-hidden="true">:</div>
+        <div class="countdown-box">
+          <div class="countdown-number" id="countMinutes">0</div>
+          <div class="countdown-label">Minutos</div>
+        </div>
+        <div class="countdown-separator" aria-hidden="true">:</div>
+        <div class="countdown-box">
+          <div class="countdown-number" id="countSeconds">0</div>
+          <div class="countdown-label">Segundos</div>
+        </div>
+      </div>
+      <button onclick="agregarAlCalendario()" class="secundario" style="margin-top:1.5rem"
+        aria-label="Añadir evento al calendario">📆 Añadir al calendario</button>
+      <div class="nav">
+        <button onclick="irA('p3')">Lugar</button>
+        <button class="secundario" onclick="irA('p1')">⬅ Volver</button>
+      </div>
+    </section>
+
+    <section class="pantalla" id="p3">
+      <h2>🏛️ Palacete de la Ochava</h2>
+      <p>Valdilecha, Madrid</p>
+      <div class="img-container">
+        <img src="/imagenes/fachada.jpg" alt="Fachada del Palacete de la Ochava" class="fullscreen" loading="lazy" />
+      </div>
+      <div class="nav">
+        <button onclick="irA('p4')">Mapa & cómo llegar</button>
+        <button class="secundario" onclick="irA('p2')">⬅ Volver</button>
+      </div>
+    </section>
+
+    <section class="pantalla" id="p4">
+      <h2>🗺️ Cómo llegar</h2>
+      <p>Calle Alcalá, 65, C. Miguel de Cervantes, 11 · 28511 Valdilecha, Madrid</p>
+      <iframe class="mapa" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        src="https://www.google.com/maps?q=Palacete%20de%20la%20Ochava%20Valdilecha&output=embed"
+        aria-label="Mapa de ubicación del Palacete de la Ochava" title="Mapa de Google Maps"></iframe>
+      <div class="nav">
+        <button onclick="irA('pInfo')">Información Útil</button>
+        <a href="https://www.google.com/maps/dir/?api=1&destination=Palacete+de+la+Ochava+Valdilecha" target="_blank"
+          rel="noopener noreferrer"><button class="secundario">Cómo llegar</button></a>
+        <button class="secundario" onclick="irA('p3')">⬅ Volver</button>
+      </div>
+    </section>
+
+    <section class="pantalla" id="pInfo">
+      <h2>ℹ️ Tu fin de semana con nosotros</h2>
+      <p style="max-width:640px">
+        Queremos que solo te preocupes de disfrutar.
+        Aquí te contamos cómo será todo, paso a paso.
+      </p>
+
+      <div class="info-cards">
+
+        <article class="info-card" role="article" data-animate="fade-up" style="transition-delay: 0.1s">
+          <div class="info-icon" aria-hidden="true">🏨</div>
+          <div class="info-content">
+            <h3>Alojamiento incluido</h3>
+            <p>
+              Todos los invitados tienen incluido el alojamiento en el Palacete.
+              Confírmanos en la encuesta si te quedas a dormir.
+            </p>
+          </div>
+        </article>
+
+        <article class="info-card" role="article" data-animate="fade-up" style="transition-delay: 0.2s">
+          <div class="info-icon" aria-hidden="true">🕓</div>
+          <div class="info-content">
+            <h3>Entrada a habitaciones</h3>
+            <p>
+              El sábado <strong>27/06 desde las 16:00</strong>.
+              No olvides traer tu DNI.
+            </p>
+          </div>
+        </article>
+
+        <article class="info-card" role="article" data-animate="fade-up" style="transition-delay: 0.3s">
+          <div class="info-icon" aria-hidden="true">🚗</div>
+          <div class="info-content">
+            <h3>Parking</h3>
+            <p>
+              Parking disponible en el Palacete para todos los invitados.
+            </p>
+          </div>
+        </article>
+
+        <article class="info-card" role="article" data-animate="fade-up" style="transition-delay: 0.4s">
+          <div class="info-icon" aria-hidden="true">🚌</div>
+          <div class="info-content">
+            <h3>Ceremonia</h3>
+            <p>
+              Antes de las 18:00 trasladaremos a todos los invitados
+              a la iglesia y de vuelta al Palacete.
+            </p>
+          </div>
+        </article>
+
+        <article class="info-card" role="article" data-animate="fade-up" style="transition-delay: 0.5s">
+          <div class="info-icon" aria-hidden="true">💈</div>
+          <div class="info-content">
+            <h3>Peluquería</h3>
+            <p>
+              Habrá servicio de peluquería en el Palacete.
+              Escríbenos si quieres reservarlo.
+            </p>
+          </div>
+        </article>
+
+        <article class="info-card" role="article" data-animate="fade-up" style="transition-delay: 0.6s">
+          <div class="info-icon" aria-hidden="true">☕</div>
+          <div class="info-content">
+            <h3>Domingo tranquilo</h3>
+            <p>
+              El domingo 28/06 habrá piscina y desayuno para todos, y
+              podrás quedarte hasta las <strong>12:30</strong>.
+            </p>
+          </div>
+        </article>
+
+      </div>
+
+      <div class="nav">
+        <button onclick="irA('p5')">Timeline</button>
+        <button class="secundario" onclick="irA('p4')">⬅ Volver</button>
+      </div>
+    </section>
+
+    <section class="pantalla" id="p5">
+      <h2>📍 Timeline</h2>
+      <div class="timeline-interactive">
+        <div class="timeline-item" data-time="16:00" data-animate="fade-up">
+          <div class="timeline-icon" aria-hidden="true">🏨</div>
+          <div class="timeline-content">
+            <div class="timeline-time">16:00</div>
+            <h3>Check-in</h3>
+            <p>Acceso a habitaciones del Palacete</p>
+          </div>
+        </div>
+
+        <div class="timeline-item" data-time="18:00" data-animate="fade-up">
+          <div class="timeline-icon" aria-hidden="true">⛪</div>
+          <div class="timeline-content">
+            <div class="timeline-time">18:00</div>
+            <h3>Ceremonia</h3>
+            <p>Iglesia de San Martín Obispo (Valdilecha)</p>
+          </div>
+        </div>
+
+        <div class="timeline-item" data-time="19:30" data-animate="fade-up">
+          <div class="timeline-icon" aria-hidden="true">🥂</div>
+          <div class="timeline-content">
+            <div class="timeline-time">19:30</div>
+            <h3>Cóctel</h3>
+            <p>Jardines del Palacete</p>
+          </div>
+        </div>
+
+        <div class="timeline-item" data-time="21:30" data-animate="fade-up">
+          <div class="timeline-icon" aria-hidden="true">🍽️</div>
+          <div class="timeline-content">
+            <div class="timeline-time">21:30</div>
+            <h3>Banquete</h3>
+            <p>Salón principal</p>
+          </div>
+        </div>
+
+        <div class="timeline-item" data-time="00:00" data-animate="fade-up">
+          <div class="timeline-icon" aria-hidden="true">💃</div>
+          <div class="timeline-content">
+            <div class="timeline-time">00:00</div>
+            <h3>Fiesta</h3>
+            <p>¡A bailar hasta el amanecer!</p>
+          </div>
+        </div>
+
+        <div class="timeline-item" data-time="09:00" data-animate="fade-up">
+          <div class="timeline-icon" aria-hidden="true">☕</div>
+          <div class="timeline-content">
+            <div class="timeline-time">10:00 (Dom)</div>
+            <h3>Desayuno y Piscina</h3>
+            <p>Recarga energías</p>
+          </div>
+        </div>
+
+        <div class="timeline-item" data-time="12:30" data-animate="fade-up">
+          <div class="timeline-icon" aria-hidden="true">👋</div>
+          <div class="timeline-content">
+            <div class="timeline-time">12:30 (Dom)</div>
+            <h3>Check-out</h3>
+            <p>Hasta pronto</p>
+          </div>
+        </div>
+      </div>
+      <div class="nav">
+        <button onclick="irA('p6')">Confirmación de asistencia</button>
+        <button class="secundario" onclick="irA('pInfo')">⬅ Volver</button>
+      </div>
+    </section>
+
+    <section class="pantalla" id="p6">
+      <h2>💌 Confirma tu asistencia</h2>
+      <form id="weddingForm" onsubmit="enviarFormulario(event)">
+        <label for="inputNombre">Nombre y Apellidos *
+          <input type="text" name="nombre" id="inputNombre" required minlength="3" autocomplete="name"
+            aria-required="true">
+          <span class="error-msg" id="errorNombre" role="alert"></span>
+        </label>
+        <label for="inputTelefono">Teléfono de contacto *
+          <input type="tel" name="telefono" id="inputTelefono" required pattern="^[0-9+]{9,15}$" inputmode="tel"
+            autocomplete="tel" aria-required="true">
+          <span class="error-msg" id="errorTelefono" role="alert"></span>
+        </label>
+        <fieldset style="margin-top:1.5rem;border:none;padding:0">
+          <legend style="font-weight:600; margin-bottom:1rem; display:block; color:var(--verde-oscuro)">¿Podrás
+            acompañarnos en este día tan especial?</legend>
+
+          <div class="radio-group">
+            <label>
+              <input type="radio" name="asistencia" value="Sí, me quedaré a dormir">
+              <span class="radio-tile">Sí, me quedaré a dormir 🌙</span>
+            </label>
+
+            <label>
+              <input type="radio" name="asistencia" value="Sí, pero me volveré a casa">
+              <span class="radio-tile">Sí, pero volveré a casa después 🚗</span>
+            </label>
+
+            <label>
+              <input type="radio" name="asistencia" value="No" required>
+              <span class="radio-tile">No podré asistir, lo siento 💔</span>
+            </label>
+          </div>
+
+          <span class="error-msg" id="errorAsistencia" role="alert"></span>
+        </fieldset>
+        <label for="inputAlergias">El banquete incluye un plato principal de carne. Si tienes alguna alergia,
+          intolerancia o restricción alimentaria (incluso si prefieres pescado), por favor háznoslo saber</label>
+        <textarea name="alergias" id="inputAlergias" rows="3"></textarea>
+        <label for="inputCancion">Elige una canción que no pueda faltar</label>
+        <textarea name="cancion" id="inputCancion" rows="1"></textarea>
+        <div class="nav">
+          <button type="submit">Enviar Confirmación</button>
+          <button class="secundario" type="button" onclick="irA('p5')">⬅ Volver</button>
+        </div>
+      </form>
+      <div id="mensaje" class="message" style="margin-top:.5rem;color:var(--verde);font-weight:600" role="status"
+        aria-live="polite"></div>
+    </section>
+
+    <section class="pantalla" id="p8">
+      <div class="img-container">
+        <img src="/imagenes/raul_laura_acu.png" alt="Laura y Raúl" class="fullscreen" loading="lazy">
+      </div>
+      <h2 id="tituloGracias">¡Gracias por tu confirmación!</h2>
+      <p>27 de junio de 2026</p>
+      <p>Nuestro mejor regalo es que nos acompañéis en este día tan especial,<br>pero si deseáis ayudarnos a iniciar
+        esta nueva aventura juntos,<br>podéis hacerlo aquí:</p>
+      <div class="cuenta-container">
+        <button id="copiarCuenta" class="btn-cuenta" onclick="revelarYCopiar()"
+          aria-label="Revelar y copiar número de cuenta">
+          <span id="numeroCuenta" aria-live="polite">●●●● ●●●● ●●●● ●●●●</span>
+          <span id="iconoCuenta" aria-hidden="true">👁️</span>
+        </button>
+        <p id="mensajeCuenta" style="margin-top:.5rem;color:var(--verde);font-weight:600" role="status"
+          aria-live="polite"></p>
+      </div>
+      <button class="secundario" onclick="irA('p1')">Volver al inicio</button>
+    </section>
+
+  </main>
+
+  <audio id="musica" src="/musica/bso.mp3" loop preload="none" playsinline></audio>
+  <button id="btnMusica" aria-label="Controlar música de fondo" aria-pressed="false">
+    <span class="music-icon" aria-hidden="true">🎵</span>
+    <span class="music-text">Música</span>
+  </button>
+
+  <script type="module" src="/src/js/main.js"></script>
+</body>
+
+</html>

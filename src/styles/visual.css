@@ -1,0 +1,588 @@
+/* Glassmorphism Utilities */
+.glass {
+    background: rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: var(--sombra-suave);
+    border-radius: 1.5rem;
+}
+
+body.dark-mode .glass {
+    background: rgba(30, 30, 30, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Apply Glass to specific components */
+#menuOpciones,
+.info-card,
+.timeline-content,
+.countdown-box,
+form {
+    background: rgba(253, 251, 247, 0.75);
+    /* var(--crema) with opacity */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: var(--sombra-suave);
+    transition: var(--tr-suave);
+}
+
+/* Hover effects for glass cards */
+.info-card:hover,
+.countdown-box:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--sombra-fuerte);
+    border-color: rgba(255, 255, 255, 0.8);
+}
+
+/* Modern Page Transitions (Fade & Scale) */
+/* Modern Page Transitions (Fluid Parallax) */
+.pantalla {
+    /* Base state: Hidden but layout-ready */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    /* Fixes clipping on long content */
+    align-items: center;
+    /* Horizontally center */
+
+    opacity: 0;
+    pointer-events: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    /* Mobile viewport fix */
+    overflow-y: auto;
+    /* Smooth mobile scroll */
+    overscroll-behavior-y: none;
+    /* Prevent pull-to-refresh on mobile apps */
+    -webkit-tap-highlight-color: transparent;
+    /* Remove blue tap box */
+
+    background: var(--crema);
+    z-index: 1;
+
+    /* Hardware acceleration */
+    will-change: transform, opacity;
+    transition: transform 1s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.8s ease;
+
+    /* Default Hidden State */
+    transform: scale(0.95) translateZ(-20px);
+    filter: blur(2px);
+
+    /* Safe area and Nav spacing */
+    padding-top: max(4rem, env(safe-area-inset-top));
+    padding-bottom: max(120px, env(safe-area-inset-bottom));
+    /* Clear Bottom Nav */
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+/* --- PRELOADER --- */
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #e6dac8;
+    /* Match envelope */
+    z-index: 50000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.6s ease, visibility 0.6s;
+}
+
+.loader-content {
+    text-align: center;
+    animation: pulse 1.5s infinite ease-in-out;
+}
+
+.loader-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    color: var(--verde-oscuro);
+    margin-bottom: 1rem;
+}
+
+.loader-spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(92, 125, 98, 0.2);
+    border-top: 4px solid var(--verde);
+    border-radius: 50%;
+    margin: 0 auto;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Hide scrollbar globally for app feel */
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+}
+
+.pantalla.activa {
+    opacity: 1;
+    pointer-events: auto;
+    transform: scale(1) translateZ(0);
+    filter: blur(0);
+    z-index: 10;
+}
+
+/* Incoming Page: Slides up/in with momentum */
+.pantalla.preparando {
+    opacity: 1;
+    /* Visible immediately */
+    transform: translateY(100vh) scale(1);
+    /* Start from bottom */
+    z-index: 20;
+    /* On top */
+    filter: blur(0);
+}
+
+/* Outgoing Page: Parallax exit (slower, darker) */
+.pantalla.saliendo {
+    opacity: 0.8;
+    transform: translateY(-20vh) scale(0.9);
+    /* Slight upward drift, pushed back */
+    filter: brightness(0.8) blur(1px);
+    z-index: 5;
+}
+
+
+/* Scroll Reveal Animations */
+[data-animate] {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+[data-animate].animate-active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Utility Gradients & Text */
+/* Center Hero Page specifically since we removed generic centering */
+#p1 {
+    justify-content: center;
+    padding-top: 0;
+    /* Hero should be vertically centered proper */
+}
+
+.text-gradient {
+    background: linear-gradient(135deg, var(--verde-oscuro) 0%, var(--verde) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.btn-glass {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Floating Animation */
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+/* Bottom Navigation Bar */
+.bottom-nav {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 400px;
+    height: 65px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 1000;
+    transition: transform 0.3s ease;
+    padding: 0 1rem;
+    border-radius: 2rem;
+    /* Pill shape */
+}
+
+/* Hide on scroll down if needed (JS) or keep static */
+
+.nav-item {
+    background: transparent;
+    border: none;
+    color: var(--verde-oscuro);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    opacity: 0.7;
+    gap: 4px;
+}
+
+.nav-item svg {
+    width: 24px;
+    height: 24px;
+    stroke: currentColor;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.nav-item.active {
+    opacity: 1;
+    color: var(--verde);
+}
+
+.nav-item.active svg {
+    transform: translateY(-5px) scale(1.1);
+    stroke: var(--dorado);
+    filter: drop-shadow(0 2px 4px rgba(212, 175, 55, 0.3));
+}
+
+.nav-item:hover svg {
+    transform: translateY(-3px);
+}
+
+/* Timeline Polish - Glass Card Edition */
+.timeline-interactive {
+    position: relative;
+    padding-left: 3rem;
+    /* More space for line */
+    margin: 3rem 0;
+    /* Removed border-left to avoid "sticking out" issue */
+}
+
+/* The Spine (Controlled Line) */
+.timeline-interactive::before {
+    content: '';
+    position: absolute;
+    /* Container padding-left is 3rem. Visual center is roughly 1.5rem */
+    left: 1.5rem;
+    top: 1.5rem;
+    /* Start at first bead center */
+    bottom: 2.5rem;
+    /* Stop before bottom */
+    width: 3px;
+    background: rgba(212, 175, 55, 0.4);
+    border-radius: 3px;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 2.5rem;
+}
+
+/* Connective Bead */
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    /* Container padding-left is 3rem. 
+       Spine is at left: 1.5rem of container (from previous step). 
+       Item is inside container. 
+       So bead needs to be at -1.5rem relative to item to hit the spine at 1.5rem container absolute? 
+       No, let's reset. */
+    left: -1.9rem;
+    /* Fine-tuned alignment */
+    top: 1.5rem;
+    width: 16px;
+    height: 16px;
+    background: var(--dorado);
+    border: 3px solid var(--crema);
+    border-radius: 50%;
+    box-shadow: 0 0 0 2px var(--dorado);
+    z-index: 2;
+}
+
+/* Dark mode bead border correction */
+body.dark-mode .timeline-item::before {
+    border-color: var(--crema);
+    /* Should match dark bg */
+}
+
+/* Glass Card for Timeline Content */
+.timeline-content {
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    position: relative;
+    transition: transform 0.3s ease;
+}
+
+.timeline-content:hover {
+    transform: translateY(-3px);
+    background: rgba(255, 255, 255, 0.7);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+/* Arrow pointing to line */
+.timeline-content::after {
+    content: '';
+    position: absolute;
+    left: -10px;
+    top: 1.5rem;
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-right: 10px solid rgba(255, 255, 255, 0.6);
+}
+
+
+/* --- SURVEY REVAMP: Custom Radio Tiles --- */
+
+/* Radio Group Grid */
+.radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+/* Hide default radio */
+.radio-group input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* The Tile Label */
+.radio-tile {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.4);
+    border: 2px solid rgba(92, 125, 98, 0.1);
+    border-radius: 1rem;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    font-weight: 500;
+    color: var(--verde-oscuro);
+}
+
+.radio-tile:hover {
+    background: rgba(255, 255, 255, 0.6);
+    transform: translateY(-2px);
+}
+
+/* Checked State */
+.radio-group input[type="radio"]:checked+.radio-tile {
+    background: rgba(92, 125, 98, 0.1);
+    border-color: var(--verde);
+    color: var(--verde);
+    box-shadow: 0 4px 12px rgba(92, 125, 98, 0.2);
+    transform: scale(1.02);
+}
+
+/* Pseudo-checkbox indicator inside tile */
+.radio-tile::before {
+    content: '';
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--verde);
+    border-radius: 50%;
+    margin-right: 1rem;
+    display: grid;
+    place-items: center;
+    transition: all 0.3s ease;
+}
+
+.radio-group input[type="radio"]:checked+.radio-tile::before {
+    background: var(--verde);
+    box-shadow: inset 0 0 0 4px #fff;
+    /* White inner circle */
+}
+
+/* Glass Inputs */
+input,
+select,
+textarea {
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(92, 125, 98, 0.2);
+    backdrop-filter: blur(4px);
+    border-radius: 0.5rem;
+    padding: 0.8rem;
+    font-family: inherit;
+    transition: all 0.3s ease;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: var(--dorado);
+    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.15);
+    outline: none;
+}
+
+/* Clean Mobile UI: Hide "Volver" buttons on small screens */
+@media (max-width: 768px) {
+    .secundario {
+        display: none !important;
+        /* Force hide back buttons */
+    }
+
+    /* Ensure only navigation related secondary buttons are hidden if needed, 
+       but keeping it simple as per plan. Exceptions can be added. */
+    button.secundario[onclick*="irA"] {
+        display: none !important;
+    }
+}
+
+@media (min-width: 768px) {
+    .bottom-nav {
+        display: none;
+    }
+}
+
+/* --- LIGHTBOX (Full Screen Zoom) --- */
+.lightbox-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 20000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    backdrop-filter: blur(5px);
+}
+
+.lightbox-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.lightbox-img {
+    max-width: 95vw;
+    max-height: 95vh;
+    border-radius: 4px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    transform: scale(0.9);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.lightbox-overlay.active .lightbox-img {
+    transform: scale(1);
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: #fff;
+    font-size: 2rem;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.1);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background 0.3s;
+}
+
+.lightbox-close:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* --- AUDIO VISUALIZER --- */
+.equalizer-bars {
+    display: flex;
+    gap: 2px;
+    height: 12px;
+    align-items: flex-end;
+}
+
+.bar {
+    width: 3px;
+    background: #fff;
+    border-radius: 1px;
+    animation: none;
+}
+
+/* Animate only when active */
+.active .bar {
+    animation: equalize 1s infinite alternate ease-in-out;
+}
+
+.active .bar:nth-child(1) {
+    animation-delay: 0s;
+    height: 6px;
+}
+
+.active .bar:nth-child(2) {
+    animation-delay: 0.2s;
+    height: 10px;
+}
+
+.active .bar:nth-child(3) {
+    animation-delay: 0.4s;
+    height: 8px;
+}
+
+@keyframes equalize {
+    0% {
+        height: 4px;
+    }
+
+    100% {
+        height: 12px;
+    }
+}
+
+/* --- TOUCH RIPPLE --- */
+.ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(212, 175, 55, 0.4);
+    transform: scale(0);
+    animation: ripple-anim 0.6s linear;
+    pointer-events: none;
+    z-index: 9999;
+    /* High enough to see, but usually append to body or button. 
+       If global, we append to body. */
+}
+
+@keyframes ripple-anim {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
