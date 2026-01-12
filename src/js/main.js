@@ -353,40 +353,8 @@ window.enviarFormulario = async function (e) {
     }
 }
 
-const musica = document.getElementById('musica');
-const btnMusica = document.getElementById('btnMusica');
-let musicaActivada = false;
+// 5. Interactive Leaflet Map
 
-if (btnMusica && musica) {
-    btnMusica.addEventListener('click', () => {
-        if (!musicaActivada) {
-            musica.muted = false;
-            musica.play().catch(err => {
-                console.log('Error al reproducir música:', err);
-                btnMusica.querySelector('.music-text').textContent = 'No disponible';
-            });
-            btnMusica.classList.add('playing');
-            btnMusica.classList.remove('stopped');
-            btnMusica.querySelector('.music-text').textContent = 'Pausar';
-            btnMusica.setAttribute('aria-pressed', 'true');
-            musicaActivada = true;
-        } else {
-            musica.pause();
-            btnMusica.classList.remove('playing');
-            btnMusica.classList.add('stopped');
-            btnMusica.querySelector('.music-text').textContent = 'Música';
-            btnMusica.setAttribute('aria-pressed', 'false');
-            musicaActivada = false;
-        }
-    });
-
-    musica.addEventListener('play', () => {
-        btnMusica.classList.add('playing');
-    });
-    musica.addEventListener('pause', () => {
-        btnMusica.classList.remove('playing');
-    });
-}
 
 function personalizarGracias() {
     try {
@@ -746,16 +714,101 @@ function updateMusicVisualizer(isPlaying) {
 // Hook into existing music logic
 // The existing event listeners on 'musica' (lines 383-389) handle class toggling.
 // Let's EXTEND them.
+// Hook into existing music logic
 const musicPlayer = document.getElementById('musica');
-if (musicPlayer) {
+const btnMusica = document.getElementById('btnMusica');
+
+if (musicPlayer && btnMusica) {
+    // Toggle Music on Click
+    btnMusica.onclick = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        if (musicPlayer.paused) {
+            musicPlayer.play().catch(err => {
+                console.error("Play error:", err);
+                // Interact with user first usually required, but this is a click handler so it should work
+            });
+        } else {
+            musicPlayer.pause();
+        }
+    };
+
+    // Update UI on State Change
     musicPlayer.addEventListener('play', () => updateMusicVisualizer(true));
     musicPlayer.addEventListener('pause', () => updateMusicVisualizer(false));
 }
 
-// Initialize New Features
+// 5. Interactive Leaflet Map
+function initMap() {
+    const mapElement = document.getElementById('mapa');
+    if (!mapElement) return;
+
+    // Wait until visible to render correctly (fix grey box issue)
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                if (!mapElement._leaflet_id) { // load once
+                    loadMap();
+                }
+            }
+        });
+    }, { rootMargin: '200px' });
+
+    observer.observe(document.getElementById('p4'));
+
+    function loadMap() {
+        // Valdilecha Coordinates (Palacete de la Ochava Exact)
+        const lat = 40.2975;
+        const lng = -3.3005;
+
+        const map = L.map('mapa', {
+            center: [lat, lng],
+            zoom: 16, /* Ampliado/Zoomed in as requested */
+            zoomControl: false,
+            attributionControl: false,
+            dragging: !L.Browser.mobile, // Disable dragging on mobile to prevent scroll trap
+            tap: !L.Browser.mobile
+        });
+
+        // Custom "Monolithic" Theme (CartoDB Voyager or similar clean style)
+        // Using a reliable open tile server. Stamen is gone, CartoDB is good.
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+            maxZoom: 20
+        }).addTo(map);
+
+        // Custom Gold Marker
+        const iconHtml = `
+            <div style="
+                background: #d4af37;
+                width: 24px;
+                height: 24px;
+                border-radius: 50% 50% 50% 0;
+                transform: rotate(-45deg);
+                box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+                border: 3px solid white;
+            "></div>
+        `;
+
+        const customIcon = L.divIcon({
+            html: iconHtml,
+            className: 'custom-pin',
+            iconSize: [30, 30],
+            iconAnchor: [15, 30]
+        });
+
+        const marker = L.marker([40.2975, -3.3005], { icon: customIcon }).addTo(map);
+        marker.bindPopup("<b>Palacete de la Ochava</b><br>¡Aquí nos casamos!").openPopup();
+
+        // Add zoom control manually at preferred position
+        L.control.zoom({ position: 'bottomright' }).addTo(map);
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     initLightbox();
     initRipples();
+    initMap();
 });
 
 // Bottom Nav Helper (Refined)

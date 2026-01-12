@@ -24,7 +24,9 @@ function initDreamyField() {
     container.appendChild(renderer.domElement);
 
     // Create Particles (Soft Circles)
-    const particleCount = 200;
+    // Reduce count on mobile for performance/battery
+    const isMobile = window.innerWidth < 768;
+    const particleCount = isMobile ? 80 : 200;
     const geometry = new THREE.BufferGeometry();
     const positions = new Float32Array(particleCount * 3);
     const originalPositions = new Float32Array(particleCount * 3); // Store origin for rubber-banding

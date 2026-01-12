@@ -12,6 +12,7 @@
     "vite": "^2.9.15"
   },
   "dependencies": {
+    "leaflet": "^1.9.4",
     "three": "^0.160.0"
   }
 }

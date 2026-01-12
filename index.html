@@ -14,8 +14,9 @@
   <meta property="og:description" content="¡Nos casamos! Palacete de la Ochava, Valdilecha.">
   <meta property="og:image" content="/imagenes/raul_laura_acu.png">
 
-  <!-- Theme Color -->
+  <!-- Theme Color & PWA -->
   <meta name="theme-color" content="#5c7d62">
+  <link rel="manifest" href="/manifest.json">
   <meta name="apple-mobile-web-app-capable" content="yes">
 
   <!-- Google Fonts -->
@@ -100,7 +101,7 @@
           Nos hace muchísima ilusión que nos acompañes en un día tan especial
         </p>
         <button onclick="irA('p2')" class="cta-button" aria-label="Comenzar a explorar la invitación"
-          data-animate="scale-in" style="transition-delay: 0.6s">
+          data-animate="scale-in" style="transition-delay: 0.6s; animation: pulse-shadow 3s infinite 2s;">
           <span>ABRIR INVITACIÓN</span>
           <svg class="arrow-icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
             <path fill="currentColor" d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z" />
@@ -156,9 +157,12 @@
     <section class="pantalla" id="p4">
       <h2>🗺️ Cómo llegar</h2>
       <p>Calle Alcalá, 65, C. Miguel de Cervantes, 11 · 28511 Valdilecha, Madrid</p>
-      <iframe class="mapa" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-        src="https://www.google.com/maps?q=Palacete%20de%20la%20Ochava%20Valdilecha&output=embed"
-        aria-label="Mapa de ubicación del Palacete de la Ochava" title="Mapa de Google Maps"></iframe>
+      <!-- Leaflet Map Container -->
+      <div id="mapa" class="mapa" role="application" aria-label="Mapa de ubicación del Palacete de la Ochava"></div>
+      <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+      <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
       <div class="nav">
         <button onclick="irA('pInfo')">Información Útil</button>
         <a href="https://www.google.com/maps/dir/?api=1&destination=Palacete+de+la+Ochava+Valdilecha" target="_blank"

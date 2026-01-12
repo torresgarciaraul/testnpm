@@ -588,3 +588,145 @@ textarea:focus {
         opacity: 0;
     }
 }
+
+/* --- ULTIMATE 3D POLISH & MAP --- */
+
+/* 1. 3D Glass Countdown Cubes */
+.countdown-box {
+    position: relative;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 12px;
+    padding: 1rem;
+    min-width: 80px;
+    transform-style: preserve-3d;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow:
+        0 4px 6px rgba(0, 0, 0, 0.05),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.countdown-box:hover {
+    transform: translateY(-5px) rotateX(10deg);
+    box-shadow:
+        0 15px 30px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.25);
+}
+
+.countdown-number {
+    font-size: 2.2rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--verde-oscuro), var(--dorado));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+/* 2. Spotlight Form Inputs */
+input,
+textarea {
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.5);
+}
+
+input:focus,
+textarea:focus {
+    transform: scale(1.02);
+    background: rgba(255, 255, 255, 0.9);
+    border-color: var(--verde);
+    box-shadow:
+        0 0 0 4px rgba(92, 125, 98, 0.1),
+        0 8px 20px rgba(0, 0, 0, 0.05);
+    /* Spotlight lift */
+    outline: none;
+}
+
+/* 3. New Map Container Style */
+.mapa {
+    position: relative;
+    border-radius: 16px;
+    box-shadow: var(--sombra-media);
+    border: 4px solid white;
+    overflow: hidden;
+    /* Square and centered as requested */
+    width: 100%;
+    max-width: 350px;
+    /* Limit width */
+    height: 350px;
+    /* Match width for square look (on desktop/tablet) */
+    aspect-ratio: 1/1;
+    /* Modern square enforcement */
+    margin: 1rem auto;
+    /* Center horizontally */
+    z-index: 1;
+    display: block;
+}
+
+/* Fix Leaflet pane z-index for this context */
+.leaflet-pane {
+    z-index: 10 !important;
+}
+
+.leaflet-top,
+.leaflet-bottom {
+    z-index: 20 !important;
+}
+
+/* Custom Pin Style */
+.custom-pin div {
+    background: #d4af37;
+    border: 3px solid #fff;
+}
+
+/* 4. Fix Gracias Screen Image (Flexbox Auto-Fit) */
+#p8 {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    /* Force full viewport height */
+    overflow: hidden;
+    /* Prevent scroll if we want exact fit, or auto if safe */
+    /* .pantalla already has overflow-y: auto, but let's try to fit it all first */
+}
+
+#p8 .img-container {
+    flex: 1;
+    /* Take all remaining vertical space */
+    min-height: 0;
+    /* Allow shrinking below content size */
+    width: 100%;
+    margin: 1rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+    border-radius: 0;
+    /* Clean edges */
+}
+
+#p8 .img-container img {
+    width: 100%;
+    height: 100%;
+    max-height: none;
+    /* Let flex container dictate height */
+    object-fit: contain;
+    /* Never crop */
+    border-radius: 12px;
+}
+
+#p8 .cuenta-container {
+    flex-shrink: 0;
+    /* Prevent text shrinking */
+    margin-bottom: 1rem;
+}
+
+#p8 h2,
+#p8 p,
+#p8 button {
+    flex-shrink: 0;
+    /* Keep text visible */
+}
