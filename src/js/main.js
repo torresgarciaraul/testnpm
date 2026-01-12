@@ -409,7 +409,8 @@ function actualizarProgreso() {
 
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/service-worker.js').then(registration => {
+        // Use relative path so it respects the /testnpm/ base
+        navigator.serviceWorker.register('./service-worker.js').then(registration => {
             console.log('SW registrado:', registration.scope);
         }).catch(error => {
             console.log('SW no disponible:', error);
