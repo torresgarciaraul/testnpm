@@ -3,6 +3,52 @@ import * as THREE from 'three';
 export function initEffects() {
     initDreamyField();
     initGlobalTilt();
+    initMagneticButtons();
+    initParallaxTypography();
+}
+
+// Parallax Typography: Titles move slower/faster than scroll
+function initParallaxTypography() {
+    const screens = document.querySelectorAll('.pantalla');
+
+    screens.forEach(screen => {
+        screen.addEventListener('scroll', () => {
+            const scrolled = screen.scrollTop;
+            const title = screen.querySelector('h2');
+            const heroTitle = screen.querySelector('.hero-title');
+
+            if (title) {
+                // Determine speed (0.5 means half speed)
+                title.style.transform = `translateY(${scrolled * 0.3}px)`;
+            }
+            if (heroTitle) {
+                heroTitle.style.transform = `translateY(${scrolled * 0.2}px)`;
+            }
+        });
+    });
+}
+
+// Magnetic Buttons: Attract cursor slightly
+function initMagneticButtons() {
+    const buttons = document.querySelectorAll('button, .cta-button, .nav-item');
+    if (window.innerWidth < 1024) return; // Disable on touch/small screens
+
+    buttons.forEach(btn => {
+        btn.addEventListener('mousemove', (e) => {
+            const rect = btn.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+
+            // Attraction strength
+            btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px) scale(1.05)`;
+            btn.style.transition = 'transform 0.1s ease-out';
+        });
+
+        btn.addEventListener('mouseleave', () => {
+            btn.style.transform = 'translate(0, 0) scale(1)';
+            btn.style.transition = 'transform 0.4s cubic-bezier(0.23, 1, 0.32, 1)';
+        });
+    });
 }
 
 // Advanced 3D Background: A "Dreamy Field" of floating particles that react to cursor

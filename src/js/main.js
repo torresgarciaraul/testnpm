@@ -305,11 +305,44 @@ window.enviarFormulario = async function (e) {
 
     const nombre = inputNombre.value.trim();
     const telefono = inputTelefono.value.trim();
+    const asistencia = document.querySelector('input[name="asistencia"]:checked')?.value;
+
+    const errorNombre = document.getElementById('errorNombre');
+    const errorTelefono = document.getElementById('errorTelefono');
+    const errorAsistencia = document.getElementById('errorAsistencia');
+
+    // Validation (with Shake Effect)
+    let isValid = true;
+
+    // Remove old errors
+    document.querySelectorAll('.input-error').forEach(el => el.classList.remove('input-error'));
+    errorNombre.textContent = '';
+    errorTelefono.textContent = '';
+    errorAsistencia.textContent = '';
 
     if (nombre.length < 3) {
-        message.textContent = "Por favor, ingresa tu nombre completo";
-        message.style.color = "#c62828";
+        errorNombre.textContent = 'Por favor, introduce tu nombre completo.';
+        document.getElementById('inputNombre').classList.add('input-error');
+        isValid = false;
+    }
+
+    const telefonoRegex = /^[0-9+]{9,15}$/;
+    if (!telefonoRegex.test(telefono)) {
+        errorTelefono.textContent = 'Introduce un teléfono válido (9-15 dígitos).';
+        document.getElementById('inputTelefono').classList.add('input-error');
+        isValid = false;
+    }
+
+    if (!asistencia) {
+        errorAsistencia.textContent = 'Por favor, indícanos si podrás venir.';
+        document.querySelector('.radio-group').classList.add('input-error'); // Highlight group
+        isValid = false;
+    }
+
+    if (!isValid) {
         submitBtn.disabled = false;
+        message.textContent = "Por favor, corrige los errores en el formulario.";
+        message.style.color = "#c62828";
         return;
     }
 

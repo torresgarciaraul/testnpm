@@ -1,11 +1,13 @@
-/* Glassmorphism Utilities */
-.glass {
-    background: rgba(255, 255, 255, 0.65);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+/* Glassmorphism Classes (Monolithic Polish) */
+.glass-card {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border: 1px solid rgba(255, 255, 255, 0.4);
-    box-shadow: var(--sombra-suave);
-    border-radius: 1.5rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    border-radius: 16px;
+    /* Subtle Grain Texture */
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
 }
 
 body.dark-mode .glass {
@@ -33,7 +35,33 @@ form {
 .countdown-box:hover {
     transform: translateY(-5px);
     box-shadow: var(--sombra-fuerte);
-    border-color: rgba(255, 255, 255, 0.8);
+    border-right-color: rgba(255, 255, 255, 0.4);
+    /* Match border */
+    top: 1.8rem;
+    /* Align with bead center visually */
+}
+
+/* Mobile Timeline Adjustments */
+@media (max-width: 768px) {
+    .timeline-interactive {
+        padding-left: 2rem;
+        /* Reduce gap */
+    }
+
+    .timeline-interactive::before {
+        left: 0.9rem;
+        /* Move spine closer to edge */
+    }
+
+    .timeline-item::before {
+        left: -1.6rem;
+        /* Re-align bead with spine */
+    }
+
+    .timeline-content {
+        padding: 1rem;
+        /* Compact padding */
+    }
 }
 
 /* Modern Page Transitions (Fade & Scale) */
@@ -146,24 +174,35 @@ form {
     z-index: 10;
 }
 
-/* Incoming Page: Slides up/in with momentum */
+/* Incoming Page: Cinematic Zoom In */
 .pantalla.preparando {
-    opacity: 1;
-    /* Visible immediately */
-    transform: translateY(100vh) scale(1);
-    /* Start from bottom */
+    opacity: 0;
+    transform: scale(1.1) translateY(20px);
+    /* Slightly larger and offset */
     z-index: 20;
-    /* On top */
-    filter: blur(0);
+    filter: blur(10px);
+    transition: none;
+    /* Reset for setup */
 }
 
-/* Outgoing Page: Parallax exit (slower, darker) */
+/* Active State: Clean and Sharp */
+.pantalla.activa {
+    opacity: 1;
+    pointer-events: auto;
+    transform: scale(1) translateY(0);
+    filter: blur(0);
+    z-index: 10;
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease, filter 0.6s ease;
+}
+
+/* Outgoing Page: Recede into background */
 .pantalla.saliendo {
-    opacity: 0.8;
-    transform: translateY(-20vh) scale(0.9);
-    /* Slight upward drift, pushed back */
-    filter: brightness(0.8) blur(1px);
+    opacity: 0;
+    transform: scale(0.9) translateY(-10px);
+    /* Move back and up slightly */
+    filter: blur(5px) brightness(0.8);
     z-index: 5;
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease, filter 0.4s ease;
 }
 
 
@@ -306,10 +345,176 @@ form {
 .timeline-item::before {
     content: '';
     position: absolute;
-    /* Container padding-left is 3rem. 
-       Spine is at left: 1.5rem of container (from previous step). 
-       Item is inside container. 
-       So bead needs to be at -1.5rem relative to item to hit the spine at 1.5rem container absolute? 
+
+    /* --- LUXURY MENU OVERLAY --- */
+    #menuOpciones {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(44, 62, 46, 0.95);
+        /* Deep elegant green */
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        z-index: 9000;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    #menuOpciones.activo {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    #menuOpciones button {
+        background: transparent;
+        border: none;
+        color: var(--dorado-brillo);
+        font-family: 'Playfair Display', serif;
+        font-size: 2.5rem;
+        padding: 1rem 2rem;
+        margin: 0.5rem 0;
+        cursor: pointer;
+        transition: transform 0.4s var(--tr-suave), color 0.3s, letter-spacing 0.3s;
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    #menuOpciones.activo button {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* Staggered Animation Delays */
+    #menuOpciones.activo button:nth-child(1) {
+        transition-delay: 0.1s;
+    }
+
+    #menuOpciones.activo button:nth-child(2) {
+        transition-delay: 0.15s;
+    }
+
+    #menuOpciones.activo button:nth-child(3) {
+        transition-delay: 0.2s;
+    }
+
+    #menuOpciones.activo button:nth-child(4) {
+        transition-delay: 0.25s;
+    }
+
+    #menuOpciones.activo button:nth-child(5) {
+        transition-delay: 0.3s;
+    }
+
+    #menuOpciones.activo button:nth-child(6) {
+        transition-delay: 0.35s;
+    }
+
+    #menuOpciones.activo button:nth-child(7) {
+        transition-delay: 0.4s;
+    }
+
+    #menuOpciones.activo button:nth-child(8) {
+        transition-delay: 0.45s;
+    }
+
+    #menuOpciones button:hover {
+        color: var(--blanco);
+        transform: scale(1.1);
+        letter-spacing: 2px;
+    }
+
+    /* --- SCROLL HINT (MOUSE ANIMATION) --- */
+    .scroll-hint {
+        position: absolute;
+        bottom: 2rem;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        opacity: 0.7;
+        pointer-events: none;
+    }
+
+    .mouse {
+        width: 26px;
+        height: 40px;
+        border: 2px solid var(--verde-oscuro);
+        border-radius: 20px;
+        margin-bottom: 5px;
+        position: relative;
+    }
+
+    .wheel {
+        width: 4px;
+        height: 4px;
+        background: var(--dorado);
+        border-radius: 50%;
+        position: absolute;
+        top: 6px;
+        left: 50%;
+        transform: translateX(-50%);
+        animation: mouse-wheel 2s infinite;
+    }
+
+    @keyframes mouse-wheel {
+        0% {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        100% {
+            transform: translateX(-50%) translateY(10px);
+            opacity: 0;
+        }
+    }
+
+    .arrows span {
+        display: block;
+        width: 10px;
+        height: 10px;
+        border-bottom: 2px solid var(--verde-oscuro);
+        border-right: 2px solid var(--verde-oscuro);
+        transform: rotate(45deg);
+        margin: -4px;
+        animation: arrow-scroll 2s infinite;
+    }
+
+    .arrows span:nth-child(2) {
+        animation-delay: -0.2s;
+    }
+
+    .arrows span:nth-child(3) {
+        animation-delay: -0.4s;
+    }
+
+    @keyframes arrow-scroll {
+        0% {
+            opacity: 0;
+            transform: rotate(45deg) translate(-5px, -5px);
+        }
+
+        50% {
+            opacity: 1;
+        }
+
+        100% {
+            opacity: 0;
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+    }
+
+    /* Container padding-left is 3rem.
+       Spine is at left: 1.5rem of container (from previous step).
+       Item is inside container.
+       So bead needs to be at -1.5rem relative to item to hit the spine at 1.5rem container absolute?
        No, let's reset. */
     left: -1.9rem;
     /* Fine-tuned alignment */
