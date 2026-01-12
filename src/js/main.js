@@ -725,10 +725,19 @@ if (musicPlayer && btnMusica) {
         e.stopPropagation();
 
         if (musicPlayer.paused) {
-            musicPlayer.play().catch(err => {
-                console.error("Play error:", err);
-                // Interact with user first usually required, but this is a click handler so it should work
-            });
+            // Force load if needed (sometimes helps on mobile)
+            if (musicPlayer.readyState === 0) {
+                musicPlayer.load();
+            }
+
+            const playPromise = musicPlayer.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(err => {
+                    console.error("Playback failed. Interaction issue?", err);
+                    // Mobile safari fix: Sometimes requires another touch. 
+                    // But usually click is enough.
+                });
+            }
         } else {
             musicPlayer.pause();
         }
