@@ -67,8 +67,10 @@ form {
     z-index: 1;
 
     /* Hardware acceleration */
+    /* Hardware acceleration */
     will-change: transform, opacity;
-    transition: transform 1s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.8s ease;
+    /* iOS-like spring physic approximation */
+    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.6s ease;
 
     /* Default Hidden State */
     transform: scale(0.95) translateZ(-20px);
