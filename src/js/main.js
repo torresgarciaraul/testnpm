@@ -528,68 +528,8 @@ if (themeToggle) {
     });
 }
 
-document.addEventListener('gesturestart', function (e) {
-    e.preventDefault();
-});
-
-// Swipe Navigation
-let touchStartX = 0;
-let touchStartY = 0;
-let touchEndX = 0;
-let touchEndY = 0;
-const minSwipeDistance = 50;
-
-document.addEventListener('touchstart', e => {
-    touchStartX = e.changedTouches[0].screenX;
-    touchStartY = e.changedTouches[0].screenY;
-});
-
-document.addEventListener('touchend', e => {
-    touchEndX = e.changedTouches[0].screenX;
-    touchEndY = e.changedTouches[0].screenY;
-    handleSwipe();
-});
-
-function handleSwipe() {
-    const swipeDistanceX = touchEndX - touchStartX;
-    const swipeDistanceY = touchEndY - touchStartY;
-
-    // Check if it's mostly vertical or horizontal
-    const isHorizontal = Math.abs(swipeDistanceX) > Math.abs(swipeDistanceY);
-
-    const screens = ['p1', 'p2', 'p3', 'p4', 'pInfo', 'p5', 'p6', 'p8'];
-    if (!pantallaActual) return;
-    const currentIndex = screens.indexOf(pantallaActual.id);
-    if (currentIndex === -1) return;
-
-    if (isHorizontal) {
-        // ... (Keep existing horizontal logic if desired, or remove if strictly vertical is requested. 
-        // User asked for vertical specifically, but keeping horizontal as fallback or additional is often good UX. 
-        // However, let's prioritize vertical as requested)
-        return;
-    }
-
-    // Vertical Swipe Logic
-    if (Math.abs(swipeDistanceY) < minSwipeDistance) return;
-
-    // Check scroll position to avoid conflict
-    const isAtTop = window.scrollY <= 5;
-    const isAtBottom = (window.innerHeight + window.scrollY) >= document.body.offsetHeight - 5;
-
-    if (swipeDistanceY < 0) {
-        // Swipe UP (Navigate Next)
-        // Only trigger if we are at the bottom of the content OR content fits screen
-        if (isAtBottom && currentIndex < screens.length - 1) {
-            irA(screens[currentIndex + 1]);
-        }
-    } else {
-        // Swipe DOWN (Navigate Back - "Volver")
-        // Only trigger if we are at the top
-        if (isAtTop && currentIndex > 0) {
-            irA(screens[currentIndex - 1]);
-        }
-    }
-}
+// Swipe Navigation REMOVED as per request
+// Navigation is now exclusively via buttons and menu.
 
 // Envelope Logic
 const envelopeOverlay = document.getElementById('envelope-overlay');
@@ -801,16 +741,16 @@ function initMap() {
     observer.observe(document.getElementById('p4'));
 
     function loadMap() {
-        // Valdilecha Coordinates (Palacete de la Ochava Exact)
-        const lat = 40.2975;
-        const lng = -3.3005;
+        // Hotel Palacete de la Ochava Exact Coordinates
+        const lat = 40.29446;
+        const lng = -3.30007;
 
         const map = L.map('mapa', {
             center: [lat, lng],
-            zoom: 16, /* Ampliado/Zoomed in as requested */
+            zoom: 17, /* More zoom for precision */
             zoomControl: false,
             attributionControl: false,
-            dragging: !L.Browser.mobile, // Disable dragging on mobile to prevent scroll trap
+            dragging: !L.Browser.mobile,
             tap: !L.Browser.mobile
         });
 
@@ -840,8 +780,8 @@ function initMap() {
             iconAnchor: [15, 30]
         });
 
-        const marker = L.marker([40.2975, -3.3005], { icon: customIcon }).addTo(map);
-        marker.bindPopup("<b>Palacete de la Ochava</b><br>¡Aquí nos casamos!").openPopup();
+        const marker = L.marker([40.29446, -3.30007], { icon: customIcon }).addTo(map);
+        marker.bindPopup("<b>Palacete de la Ochava</b><br>Calle Alcalá, 65, C. Miguel de Cervantes, 11<br>28511 Valdilecha, Madrid").openPopup();
 
         // Add zoom control manually at preferred position
         L.control.zoom({ position: 'bottomright' }).addTo(map);

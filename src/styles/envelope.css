@@ -18,13 +18,15 @@
 
 /* Base Texture Mixin (applied via class) */
 .paper-texture {
-    /* Elegant Cream Paper with Noise */
-    background-color: #f7f1e3;
+    /* ANTIQUE ROUGH PAPER - Heavy Texture Variant */
+    background-color: #f6f1e8;
     background-image:
-        url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.08'/%3E%3C/svg%3E"),
-        linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, rgba(0, 0, 0, 0.05) 100%);
-    box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.05);
-    /* Vignette */
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 500 500' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='roughPaper'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.03' numOctaves='5' stitchTiles='stitch'/%3E%3CfeDiffuseLighting lighting-color='%23fff8e7' surfaceScale='15'%3E%3CfeDistantLight azimuth='45' elevation='25'/%3E%3C/feDiffuseLighting%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23roughPaper)' opacity='0.8'/%3E%3C/svg%3E"),
+        radial-gradient(circle at center, transparent 30%, rgba(101, 67, 33, 0.2) 100%),
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.15'/%3E%3C/svg%3E");
+
+    background-blend-mode: multiply, normal, overlay;
+    box-shadow: inset 0 0 100px rgba(80, 50, 20, 0.2);
 }
 
 .envelope-wrapper {
@@ -35,10 +37,10 @@
     max-height: none;
     transform-style: preserve-3d;
     cursor: pointer;
-    background: #f0e6d2;
+    background: #e6dfd1;
+    /* Inner envelope darker parchment */
     transition: transform 1.5s cubic-bezier(0.65, 0, 0.35, 1);
     box-shadow: none;
-    /* No outer shadow needed for full screen */
     border-radius: 0;
 }
 
@@ -53,11 +55,14 @@
     /* Half screen */
     clip-path: polygon(0 0, 100% 0, 50% 100%);
     transform-origin: top center;
-    transition: transform 1.8s cubic-bezier(0.45, 0, 0.1, 1);
-    /* Slower, majestic */
+    transform-origin: top center;
+    transition: transform 2s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 10;
-    filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.15));
-    background: linear-gradient(to bottom, #f7f1e3, #e6dac8);
+    filter: drop-shadow(0 20px 50px rgba(0, 0, 0, 0.25));
+    background: linear-gradient(to bottom, #fdfbf7 0%, #f0e6d2 100%);
+    /* Antique gradient */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+    /* Worn edge highlight */
 }
 
 .bottom-flap {
@@ -66,10 +71,9 @@
     left: 0;
     width: 100%;
     height: 55vh;
-    /* Slight overlap */
     clip-path: polygon(0 100%, 100% 100%, 50% 0);
     z-index: 9;
-    background: linear-gradient(to top, #f2e9db, #e0d0b8);
+    background: linear-gradient(to top, #e8dfcc, #dacdb3);
 }
 
 .side-flap-left {
@@ -77,11 +81,9 @@
     top: 0;
     left: 0;
     width: 55vw;
-    /* Slight overlap center */
-    height: 100%;
     clip-path: polygon(0 0, 0 100%, 100% 50%);
     z-index: 8;
-    background: #ebe0cf;
+    background: #e3d8c4;
 }
 
 .side-flap-right {
@@ -89,10 +91,9 @@
     top: 0;
     right: 0;
     width: 55vw;
-    height: 100%;
     clip-path: polygon(100% 0, 100% 100%, 0 50%);
     z-index: 8;
-    background: #ebe0cf;
+    background: #e3d8c4;
 }
 
 /* The Stamp/Seal - Ultra Realistic & Larger */
@@ -104,12 +105,12 @@
     width: 140px;
     height: 140px;
 
-    /* Complex Gradient for Shiny Wax */
+    /* Pale Pink / Blush Seal */
     background: radial-gradient(circle at 30% 30%,
-            #ff6b6b,
-            #c62828 40%,
-            #8e0000 85%,
-            #500000 100%);
+            #ffe4e1,
+            #ffccd5 40%,
+            #f0b6c2 85%,
+            #dcaabb 100%);
 
     border-radius: 50%;
     z-index: 20;
@@ -118,11 +119,12 @@
     align-items: center;
 
     /* Simulate messy pressed wax edge */
+    /* Soft Pink Shadow */
     box-shadow:
-        0 15px 35px rgba(0, 0, 0, 0.4),
-        inset 2px 2px 5px rgba(255, 255, 255, 0.4),
-        inset -2px -5px 10px rgba(0, 0, 0, 0.3),
-        0 0 0 4px rgba(183, 28, 28, 0.1);
+        0 15px 35px rgba(0, 0, 0, 0.3),
+        inset 2px 2px 5px rgba(255, 255, 255, 0.8),
+        inset -2px -5px 10px rgba(180, 100, 110, 0.3),
+        0 0 0 4px rgba(255, 200, 210, 0.1);
 
     border: 3px solid rgba(255, 255, 255, 0.1);
     cursor: pointer;
@@ -138,10 +140,11 @@
     font-family: 'Playfair Display', serif;
     font-weight: 700;
     font-style: italic;
-    font-size: 2.5rem;
-    color: #e6c585;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
-    opacity: 0.95;
+    font-size: 2.8rem;
+    color: #b58d94;
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.4), -1px -1px 2px rgba(0, 0, 0, 0.1);
+    /* Embossed text */
+    opacity: 0.9;
     transform: rotate(-10deg);
 }
 

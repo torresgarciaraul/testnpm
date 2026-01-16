@@ -104,12 +104,17 @@ section {
   /* Display handled by visual.css */
   /* Padding handled by visual.css */
   width: 100%;
-  background: var(--crema);
   /* Scroll handled by visual.css */
+  background: transparent;
+  /* Remove fixed background to prevent mismatch */
 }
 
 .pantalla.activa {
   display: flex;
+  flex-direction: column;
+  /* Ensure vertical stacking */
+  align-items: center;
+  /* Center content horizontally */
   opacity: 1;
   transform: translateX(0);
 }
@@ -133,11 +138,15 @@ h3 {
   line-height: 1.2;
 }
 
+/* Main Screen Harmonization */
 h1 {
-  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
   font-weight: 700;
-  letter-spacing: -0.02em;
-  margin-bottom: 0.5rem;
+  letter-spacing: -0.03em;
+  margin-bottom: 0.8rem;
+  line-height: 1.1;
+  text-align: center;
+  /* Center Text */
 }
 
 h2 {
@@ -308,10 +317,36 @@ img {
   border-radius: 1rem;
 }
 
-img.fullscreen {
-  max-height: 40vh;
+img.fullscreen,
+#p8 img {
+  /* Specific rule for Thank You screen image */
+  max-height: 50vh;
+  /* Responsive height limit */
   max-width: 90vw;
+  width: auto;
   object-fit: contain;
+  /* NO BOX SHADOW for p8 to seamless integration */
+  border-radius: 1rem;
+  margin-bottom: 1.5rem;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.15));
+  /* Soft shadow on image itself, not box */
+}
+
+/* Seamless Integration for p8 Image Container */
+#p8 .img-container {
+  background: none !important;
+  /* Force remove any background */
+  box-shadow: none !important;
+  /* Force remove any shadow */
+  border: none !important;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
+
+#p8 .img-container::after {
+  display: none;
+  /* Remove overlay gradient */
 }
 
 .timeline-img {
@@ -403,14 +438,17 @@ select.valid {
   background-color: #f1f8f4;
 }
 
-iframe.mapa {
+#mapa.mapa {
   width: 100%;
   max-width: 640px;
-  height: 320px;
+  height: 400px;
+  /* Increased height for better view */
   border: 0;
   border-radius: 1rem;
   margin-top: 1rem;
   box-shadow: 0 4px 12px var(--sombra);
+  z-index: 5;
+  /* Ensure interactivity */
 }
 
 .timeline {
@@ -630,11 +668,24 @@ iframe.mapa {
 .hero-content {
   position: relative;
   z-index: 1;
+  display: flex;
+  /* Flexbox for centering */
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+  min-height: 100vh;
+  /* Ensure full viewport centering */
+  box-sizing: border-box;
 }
 
 .hero-img {
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
   animation: scaleIn 1s ease-out;
+  width: auto;
+  max-width: 90vw;
+  /* Responsive constraint */
 }
 
 @keyframes scaleIn {
