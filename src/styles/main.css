@@ -320,33 +320,34 @@ img {
 img.fullscreen,
 #p8 img {
   /* Specific rule for Thank You screen image */
-  max-height: 50vh;
-  /* Responsive height limit */
+  max-height: 55vh;
+  /* Increased from 50vh */
   max-width: 90vw;
   width: auto;
   object-fit: contain;
-  /* NO BOX SHADOW for p8 to seamless integration */
   border-radius: 1rem;
   margin-bottom: 1.5rem;
   filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.15));
-  /* Soft shadow on image itself, not box */
+
+  /* Mobile optimization to prevent layout shift */
+  height: auto;
+  display: block;
 }
 
 /* Seamless Integration for p8 Image Container */
 #p8 .img-container {
   background: none !important;
-  /* Force remove any background */
   box-shadow: none !important;
-  /* Force remove any shadow */
   border: none !important;
   margin: 0;
   display: flex;
   justify-content: center;
+  /* Fix for mobile weirdness: ensure stable height */
+  min-height: 200px;
 }
 
 #p8 .img-container::after {
   display: none;
-  /* Remove overlay gradient */
 }
 
 .timeline-img {
@@ -681,11 +682,37 @@ select.valid {
 }
 
 .hero-img {
-  margin-bottom: 2.5rem;
+  margin-bottom: 2rem;
   animation: scaleIn 1s ease-out;
   width: auto;
+  /* Allow it to grow larger but respect viewport */
+  max-height: 55vh;
   max-width: 90vw;
-  /* Responsive constraint */
+}
+
+@media (min-width: 768px) {
+  .hero-img {
+    max-height: 65vh;
+    /* Even larger on desktop */
+  }
+}
+
+@media (max-width: 640px) {
+
+  /* Mobile specific adjustments to fit everything */
+  .hero-img {
+    max-height: 45vh;
+    /* Slightly smaller on small screens to fit text */
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-content {
+    padding: 1rem;
+    justify-content: flex-start;
+    /* Start from top to avoid cutting off bottom */
+    padding-top: 4rem;
+    /* Space for top elements */
+  }
 }
 
 @keyframes scaleIn {
