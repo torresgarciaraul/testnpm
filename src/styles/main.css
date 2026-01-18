@@ -1115,6 +1115,8 @@ select.valid {
   .timeline-item {
     flex-direction: row !important;
     text-align: left !important;
+    align-items: flex-start;
+    /* Align to top so icon stays with title if text wraps */
   }
 
   .timeline-icon {
@@ -1122,11 +1124,21 @@ select.valid {
     height: 60px;
     font-size: 2rem;
     margin-left: 10px;
+    flex-shrink: 0;
+    /* Prevent icon shrinking */
+    margin-top: 0px;
   }
 
   .timeline-content {
     margin-left: 1rem;
-    margin-right: 0;
+    margin-right: 10px;
+    /* Add right margin safety */
+    min-width: 0;
+    /* Allow flex item to shrink below content size */
+    width: 100%;
+    /* Take available space */
+    max-width: none;
+    /* Remove desktop restriction */
   }
 }
 

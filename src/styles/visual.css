@@ -652,19 +652,15 @@ textarea:focus {
     outline: none;
 }
 
-/* Clean Mobile UI: Hide "Volver" buttons on small screens */
-@media (max-width: 768px) {
+/* Clean Mobile UI: Hide "Volver" buttons on small screens - REMOVED per user request to restore functionality */
+/* @media (max-width: 768px) {
     .secundario {
         display: none !important;
-        /* Force hide back buttons */
     }
-
-    /* Ensure only navigation related secondary buttons are hidden if needed, 
-       but keeping it simple as per plan. Exceptions can be added. */
     button.secundario[onclick*="irA"] {
         display: none !important;
     }
-}
+} */
 
 @media (min-width: 768px) {
     .bottom-nav {
