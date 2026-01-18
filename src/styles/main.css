@@ -78,7 +78,7 @@ section {
   top: -40px;
   left: 0;
   background: var(--verde);
-  color: #fff;
+  color: var(--blanco);
   padding: .5rem 1rem;
   text-decoration: none;
   z-index: 10000;
@@ -226,7 +226,7 @@ p {
   height: 80px;
   border-radius: 50%;
   background: var(--verde);
-  color: #fff;
+  color: var(--blanco);
   font-size: 3rem;
   display: flex;
   align-items: center;
@@ -253,7 +253,7 @@ button {
   border-radius: 999px;
   border: none;
   background: var(--verde);
-  color: #fff;
+  color: var(--blanco);
   font-size: 1rem;
   cursor: pointer;
   transition: all .3s ease;
@@ -498,7 +498,7 @@ select.valid {
   padding: .8rem 1.2rem;
   border-radius: 999px;
   background: var(--verde);
-  color: #fff;
+  color: var(--blanco);
   border: none;
   cursor: pointer;
   z-index: 999;
@@ -550,7 +550,7 @@ select.valid {
   font-size: .9rem;
   border-radius: 999px;
   background: var(--verde);
-  color: #fff;
+  color: var(--blanco);
   border: none;
   cursor: pointer;
   z-index: 999;
@@ -1209,7 +1209,7 @@ body.dark-mode select {
   padding: 0.8rem 1.2rem;
   border-radius: 999px;
   background: var(--verde);
-  color: #fff;
+  color: var(--blanco);
   border: none;
   cursor: pointer;
   z-index: 999;

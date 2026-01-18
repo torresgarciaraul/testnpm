@@ -258,7 +258,7 @@ function cargarDatosGuardados() {
             if (radio) radio.checked = true;
         }
     } catch (e) {
-        console.log('Error al cargar datos guardados:', e);
+
     }
 }
 
@@ -269,7 +269,7 @@ formFields.forEach(fieldId => {
             try {
                 localStorage.setItem('form_' + fieldId, this.value);
             } catch (e) {
-                console.log('Error al guardar:', e);
+
             }
         });
     }
@@ -280,7 +280,7 @@ radioAsistencia.forEach(radio => {
         try {
             localStorage.setItem('form_asistencia', this.value);
         } catch (e) {
-            console.log('Error al guardar:', e);
+
         }
     });
 });
@@ -292,7 +292,7 @@ function limpiarDatosGuardados() {
         });
         localStorage.removeItem('form_asistencia');
     } catch (e) {
-        console.log('Error al limpiar datos:', e);
+
     }
 }
 
@@ -371,7 +371,7 @@ window.enviarFormulario = async function (e) {
             try {
                 localStorage.setItem('nombreInvitado', primerNombre);
             } catch (e) {
-                console.log('Error al guardar nombre:', e);
+
             }
         }
 
@@ -397,7 +397,7 @@ function personalizarGracias() {
             if (titulo) titulo.textContent = '¡Gracias, ' + nombreInvitado + '!';
         }
     } catch (e) {
-        console.log('Error al personalizar:', e);
+
     }
 }
 
@@ -444,9 +444,9 @@ if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
         // Use relative path so it respects the /testnpm/ base
         navigator.serviceWorker.register('./service-worker.js').then(registration => {
-            console.log('SW registrado:', registration.scope);
+
         }).catch(error => {
-            console.log('SW no disponible:', error);
+
         });
     });
 }
@@ -523,7 +523,7 @@ if (themeToggle) {
         try {
             localStorage.setItem('theme', isDark ? 'dark' : 'light');
         } catch (e) {
-            console.log('Error al guardar tema:', e);
+
         }
     });
 }
